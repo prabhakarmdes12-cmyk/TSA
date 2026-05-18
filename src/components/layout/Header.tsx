@@ -62,7 +62,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass">
-      <nav className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+      <nav className="max-w-[1400px] mx-auto px-4 lg:px-6 h-14 md:h-16 flex items-center justify-between gap-2 md:gap-4">
         <Link
           href={`/${locale}`}
           className="relative flex items-center gap-3 group"
@@ -75,7 +75,7 @@ export function Header() {
             key={logo}
             src={logo}
             alt="TS Aromatics"
-            className="h-8 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
+            className="h-7 md:h-8 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
             fetchPriority="high"
           />
         </Link>
@@ -106,7 +106,7 @@ export function Header() {
           {mounted && (
             <button
               onClick={toggleTheme}
-              className="w-11 h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] hover:scale-105 transition-transform"
+              className="w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] hover:scale-105 transition-transform shrink-0"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
@@ -115,7 +115,7 @@ export function Header() {
 
           <button
             onClick={toggleLang}
-            className="w-11 h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] text-xs font-black hover:scale-105 transition-transform"
+            className="w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] text-xs font-black hover:scale-105 transition-transform shrink-0"
             aria-label="Switch language"
           >
             {locale === 'en' ? 'EN' : 'हि'}
@@ -129,7 +129,7 @@ export function Header() {
           </Link>
 
           <button
-            className="lg:hidden w-11 h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)]"
+            className="lg:hidden w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] shrink-0"
             onClick={() => setOpen(!open)}
             aria-label="Toggle navigation"
           >
@@ -140,27 +140,30 @@ export function Header() {
 
       {open && (
         <div className="lg:hidden glass border-t border-[var(--color-border)] animate-[fadeSlide_0.3s_ease]">
-          <div className="px-6 py-4 flex flex-col gap-4">
+          <div className="px-4 md:px-6 py-4 md:py-5 flex flex-col gap-1">
             {links.map((link) => {
             const active = isActive(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm transition-colors py-2 ${
+                className={`relative text-sm font-semibold transition-colors py-3 px-3 rounded-xl ${
                   active
-                    ? 'text-[var(--color-brand-red)]'
-                    : 'text-[var(--color-muted)] hover:text-[var(--color-brand-red)]'
+                    ? 'text-[var(--color-brand-red)] bg-[var(--color-surface-1)]'
+                    : 'text-[var(--color-muted)] hover:text-[var(--color-brand-red)] hover:bg-[var(--color-surface-1)]'
                 }`}
                 onClick={() => setOpen(false)}
               >
                 {link.label}
+                {active && (
+                  <span className="absolute left-3 bottom-0 h-[2px] w-6 rounded-sm bg-[var(--color-brand-red)]" />
+                )}
               </Link>
             );
           })}
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex items-center justify-center px-4 py-3 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold"
+              className="w-full inline-flex items-center justify-center px-4 py-3 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold mt-2"
               onClick={() => setOpen(false)}
             >
               {t('enquiry')}
