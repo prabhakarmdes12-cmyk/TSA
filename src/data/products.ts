@@ -104,6 +104,21 @@ const images: Record<string, string> = {
   'kokum-butter': '/images/products/carrier.svg',
   'myrhh-oil': '/images/products/woods.svg',
   'neroli-oil': '/images/products/floral.svg',
+  'capsicum-oleoresin': '/images/products/spice.svg',
+  'turmeric-oleoresin': '/images/products/spice.svg',
+  'black-pepper-oleoresin': '/images/products/spice.svg',
+  'ginger-oleoresin': '/images/products/spice.svg',
+  'cardamom-oleoresin': '/images/products/spice.svg',
+  'clove-oleoresin': '/images/products/spice.svg',
+  'cumin-oil': '/images/products/spice.svg',
+  'coriander-oil': '/images/products/spice.svg',
+  'jasmine-water': '/images/products/floral.svg',
+  'lavender-water': '/images/products/floral.svg',
+  'chamomile-water': '/images/products/floral.svg',
+  'neroli-water': '/images/products/floral.svg',
+  'witch-hazel-water': '/images/products/floral.svg',
+  'sea-buckthorn-seed-oil': '/images/products/carrier.svg',
+  'olive-squalane': '/images/products/carrier.svg',
   fallback: '/images/products/fallback.svg',
 };
 
@@ -228,6 +243,21 @@ const botanicalNames: Record<string, string> = {
   'kokum-butter': 'Garcinia indica',
   'myrhh-oil': 'Commiphora myrrha',
   'neroli-oil': 'Citrus aurantium',
+  'capsicum-oleoresin': 'Capsicum annuum',
+  'turmeric-oleoresin': 'Curcuma longa',
+  'black-pepper-oleoresin': 'Piper nigrum',
+  'ginger-oleoresin': 'Zingiber officinale',
+  'cardamom-oleoresin': 'Elettaria cardamomum',
+  'clove-oleoresin': 'Eugenia caryophyllata',
+  'cumin-oil': 'Cuminum cyminum',
+  'coriander-oil': 'Coriandrum sativum',
+  'jasmine-water': 'Jasminum officinale',
+  'lavender-water': 'Lavandula angustifolia',
+  'chamomile-water': 'Matricaria chamomilla',
+  'neroli-water': 'Citrus aurantium',
+  'witch-hazel-water': 'Hamamelis virginiana',
+  'sea-buckthorn-seed-oil': 'Hippophae rhamnoides',
+  'olive-squalane': 'Olea europaea',
 };
 
 export const gcmsBatchIds: Record<string, string> = {
@@ -320,6 +350,8 @@ export const gcmsBatchIds: Record<string, string> = {
   'kokum-butter': 'TS-KB-2026-035',
   'myrhh-oil': 'TS-MYR-2026-055',
   'neroli-oil': 'TS-NER-2026-058',
+  'witch-hazel-water': 'TS/WH/160824',
+  'sea-buckthorn-seed-oil': 'TS/SBS/270724',
 };
 
 const badgeRules: Record<string, BadgeRule> = {
@@ -421,6 +453,21 @@ const productMolecules: Record<string, string[]> = {
   'kokum-butter': ['oleic_acid', 'linoleic_acid'],
   'myrhh-oil': ['alpha-pinene', 'limonene', 'beta-caryophyllene'],
   'neroli-oil': ['linalool', 'limonene', 'geraniol'],
+  'capsicum-oleoresin': ['capsaicin', 'oleic_acid'],
+  'turmeric-oleoresin': ['turmerone', 'curcumin'],
+  'black-pepper-oleoresin': ['piperine', 'beta-caryophyllene'],
+  'ginger-oleoresin': ['gingerol', 'zingiberene'],
+  'cardamom-oleoresin': ['alpha-terpinyl_acetate', '1,8-cineole'],
+  'clove-oleoresin': ['eugenol', 'beta-caryophyllene'],
+  'cumin-oil': ['cuminaldehyde', 'limonene'],
+  'coriander-oil': ['linalool', 'geraniol'],
+  'jasmine-water': ['benzyl_acetate', 'linalool'],
+  'lavender-water': ['linalool', 'linalyl_acetate'],
+  'chamomile-water': ['chamazulene', 'alpha-bisabolol'],
+  'neroli-water': ['linalool', 'limonene'],
+  'witch-hazel-water': ['tannin', 'gallic_acid'],
+  'sea-buckthorn-seed-oil': ['palmitoleic_acid', 'linoleic_acid', 'oleic_acid'],
+  'olive-squalane': ['squalane', 'oleic_acid'],
 };
 
 const categoryMap: Record<string, string> = {
@@ -536,6 +583,21 @@ const categoryMap: Record<string, string> = {
   'kokum-butter': 'Butters',
   'myrhh-oil': 'Woods',
   'neroli-oil': 'Floral',
+  'capsicum-oleoresin': 'Extracts',
+  'turmeric-oleoresin': 'Extracts',
+  'black-pepper-oleoresin': 'Extracts',
+  'ginger-oleoresin': 'Extracts',
+  'cardamom-oleoresin': 'Extracts',
+  'clove-oleoresin': 'Extracts',
+  'cumin-oil': 'Spice',
+  'coriander-oil': 'Spice',
+  'jasmine-water': 'Floral',
+  'lavender-water': 'Floral',
+  'chamomile-water': 'Floral',
+  'neroli-water': 'Floral',
+  'witch-hazel-water': 'Floral',
+  'sea-buckthorn-seed-oil': 'Carrier Oils',
+  'olive-squalane': 'Carrier Oils',
 };
 
 const rawProducts: Omit<Product, 'img' | 'botanicalName' | 'specs' | 'gcmsBatchId' | 'badgeRule' | 'molecules' | 'category' | 'coaImage'>[] = [
@@ -653,6 +715,21 @@ const rawProducts: Omit<Product, 'img' | 'botanicalName' | 'specs' | 'gcmsBatchI
   { id: 'kokum-butter', name: 'Kokum Butter', imgKey: 'kokum-butter', desc: 'Light, non-greasy butter with high stability \u2013 ideal for balms, lotions, and hair conditioners.', badge: '', benefits: ['Non-greasy', 'High absorption', 'Skin softening', 'Antioxidant-rich'], uses: ['Lip balms', 'Body butters', 'Hair conditioners', 'Soap making'], tags: ['butter', 'cosmetic'] },
   { id: 'myrhh-oil', name: 'Myrhh Oil', imgKey: 'myrhh-oil', desc: 'Warm, balsamic resinous oil for perfumery, spiritual blends, and traditional wellness preparations.', badge: '', benefits: ['Warm balsamic aroma', 'Grounding', 'Antimicrobial', 'Skin healing'], uses: ['Perfume', 'Meditation blends', 'Skincare', 'Incense'], tags: ['essential', 'woods', 'aromatherapy', 'wellness'] },
   { id: 'neroli-oil', name: 'Neroli Oil', imgKey: 'neroli-oil', desc: 'Exquisite orange blossom oil for luxury perfumery, premium skincare, and elegant aromatherapy.', badge: 'Premium', benefits: ['Exquisite floral note', 'Luxury perfumery', 'Calming', 'Skin regenerative'], uses: ['Luxury perfumes', 'Face serums', 'Diffusers', 'Body oils'], tags: ['essential', 'floral', 'premium', 'cosmetic', 'aromatherapy'] },
+  { id: 'capsicum-oleoresin', name: 'Capsicum Oleoresin', imgKey: 'spice', desc: 'Concentrated oleoresin from chilli peppers rich in capsaicin \u2013 used in topical analgesic, food, and industrial formulations.', badge: '', benefits: ['High capsaicin content', 'Concentrated form', 'Versatile industrial use', 'Natural origin'], uses: ['Topical balms', 'Food flavouring', 'Self-defence sprays', 'Pharmaceuticals'], tags: ['extract', 'industrial', 'wellness'] },
+  { id: 'turmeric-oleoresin', name: 'Turmeric Oleoresin', imgKey: 'spice', desc: 'Vibrant oleoresin rich in curcumin \u2013 used in colouring, nutraceutical, and cosmetic formulations.', badge: '', benefits: ['High curcumin content', 'Natural colourant', 'Anti-inflammatory', 'Antioxidant'], uses: ['Food colouring', 'Nutraceuticals', 'Skincare', 'Pharmaceuticals'], tags: ['extract', 'cosmetic', 'wellness'] },
+  { id: 'black-pepper-oleoresin', name: 'Black Pepper Oleoresin', imgKey: 'spice', desc: 'Aromatic oleoresin capturing the full flavour profile of black pepper \u2013 for food, fragrance, and wellness.', badge: '', benefits: ['Full flavour profile', 'Concentrated', 'Natural preservative', 'Versatile'], uses: ['Food seasoning', 'Fragrance blends', 'Digestive wellness', 'Meat processing'], tags: ['extract', 'wellness'] },
+  { id: 'ginger-oleoresin', name: 'Ginger Oleoresin', imgKey: 'spice', desc: 'Pungent oleoresin with the full gingerol profile \u2013 for food, beverage, and functional formulations.', badge: '', benefits: ['Full gingerol profile', 'Concentrated', 'Digestive support', 'Anti-inflammatory'], uses: ['Food flavouring', 'Beverages', 'Wellness blends', 'Pharmaceuticals'], tags: ['extract', 'wellness'] },
+  { id: 'cardamom-oleoresin', name: 'Cardamom Oleoresin', imgKey: 'spice', desc: 'Aromatic oleoresin with the complete cardamom terpene profile \u2013 for flavour, fragrance, and functional use.', badge: '', benefits: ['Complete terpene profile', 'High concentration', 'Warm sweet aroma', 'Versatile'], uses: ['Food flavouring', 'Perfumery', 'Digestive wellness', 'Beverages'], tags: ['extract', 'wellness'] },
+  { id: 'clove-oleoresin', name: 'Clove Oleoresin', imgKey: 'spice', desc: 'Potent oleoresin rich in eugenol \u2013 for dental, fragrance, food, and antimicrobial applications.', badge: '', benefits: ['High eugenol content', 'Concentrated', 'Antimicrobial', 'Warm spicy note'], uses: ['Dental products', 'Fragrance', 'Food flavouring', 'Industrial'], tags: ['extract', 'industrial', 'wellness'] },
+  { id: 'cumin-oil', name: 'Cumin Oil', imgKey: 'spice', desc: 'Warm, earthy essential oil with a distinct spice profile \u2013 used in flavouring, fragrance, and digestive wellness blends.', badge: '', benefits: ['Warm earthy profile', 'Digestive aid', 'Distinct aroma', 'Versatile'], uses: ['Food flavouring', 'Fragrance', 'Digestive blends', 'Soaps'], tags: ['essential', 'spice', 'wellness'] },
+  { id: 'coriander-oil', name: 'Coriander Oil', imgKey: 'spice', desc: 'Fresh, herbaceous essential oil from coriander seeds \u2013 valued in flavouring, perfumery, and natural wellness.', badge: '', benefits: ['Herbaceous fresh profile', 'Linalool-rich', 'Calming', 'Versatile note'], uses: ['Food flavouring', 'Fragrance', 'Aromatherapy', 'Soaps'], tags: ['essential', 'spice', 'wellness'] },
+  { id: 'jasmine-water', name: 'Jasmine Water', imgKey: 'floral', desc: 'Gentle floral hydrosol from jasmine blossoms \u2013 a soothing, aromatic toner for skincare and aromatherapy.', badge: '', benefits: ['Gentle floral toner', 'Exotic aroma', 'Soothing', 'Alcohol-free'], uses: ['Facial toners', 'Body mists', 'Aromatherapy', 'Traditional preparations'], tags: ['floral', 'cosmetic', 'wellness'] },
+  { id: 'lavender-water', name: 'Lavender Water', imgKey: 'floral', desc: 'Calming floral hydrosol from lavender distillation \u2013 for gentle skincare, sleep sprays, and aromatic mists.', badge: '', benefits: ['Calming aroma', 'Gentle toner', 'Alcohol-free', 'Versatile'], uses: ['Sleep mists', 'Facial toners', 'Body sprays', 'Pillow mists'], tags: ['floral', 'cosmetic', 'wellness'] },
+  { id: 'chamomile-water', name: 'Chamomile Water', imgKey: 'floral', desc: 'Soothing floral hydrosol rich in azulene \u2013 ideal for sensitive skin, baby care, and calming formulations.', badge: '', benefits: ['Ultra-soothing', 'Azulene-rich', 'Sensitive skin', 'Alcohol-free'], uses: ['Sensitive skin care', 'Baby care', 'Soothing mists', 'Eye compresses'], tags: ['floral', 'cosmetic', 'wellness'] },
+  { id: 'neroli-water', name: 'Neroli (Orange Blossom) Water', imgKey: 'floral', desc: 'Exquisite floral hydrosol from orange blossoms \u2013 a luxury toner for brightening, firming, and aromatic elegance.', badge: '', benefits: ['Brightening toner', 'Aromatic elegance', 'Alcohol-free', 'Gentle astringent'], uses: ['Luxury toners', 'Body mists', 'Brightening skincare', 'Aromatherapy'], tags: ['floral', 'cosmetic', 'wellness'] },
+  { id: 'witch-hazel-water', name: 'Witch Hazel Water', imgKey: 'floral', desc: 'Natural astringent hydrosol from Hamamelis virginiana \u2013 ideal for oily skin, after-shave, and clarifying products.', badge: '', benefits: ['Natural astringent', 'Clarifying', 'Soothing', 'Alcohol-free'], uses: ['After-shave', 'Oily skin care', 'Toners', 'Acne treatments'], tags: ['floral', 'cosmetic', 'wellness'] },
+  { id: 'sea-buckthorn-seed-oil', name: 'Sea Buckthorn Seed Oil', imgKey: 'carrier', desc: 'Cold-pressed seed oil rich in omegas 3, 6, 9 and 7 \u2013 premium carrier for anti-aging, regenerative, and therapeutic skincare.', badge: 'Premium', benefits: ['Balanced omegas', 'Regenerative', 'Anti-aging', 'Carrier for actives'], uses: ['Face oils', 'Anti-aging formulations', 'Scar treatments', 'Therapeutic skincare'], tags: ['carrier', 'premium', 'cosmetic'] },
+  { id: 'olive-squalane', name: 'Olive Squalane', imgKey: 'carrier', desc: 'Biomimetic emollient derived from olive oil \u2013 offering superior hydration, skin barrier repair, and luxurious feel.', badge: '', benefits: ['Biomimetic', 'Superior hydration', 'Light feel', 'Skin barrier repair'], uses: ['Face oils', 'Serums', 'Moisturisers', 'Hair elixirs'], tags: ['carrier', 'premium', 'cosmetic'] },
 ];
 
 export function getAllProducts(): Product[] {
