@@ -44,10 +44,11 @@ This journal documents not just what was built, but *why* and *how* — the desi
 | Check | Status |
 |---|---|
 | `npx next build` | ✅ Zero errors |
-| Static pages (SSG) | 73 products + 8 articles |
+| Static pages (SSG) | 127 products + 8 articles |
 | Dynamic routes | Home, products listing, academy listing, why-us, contact |
 | TypeScript | Strict mode — `strict: true` |
 | Bundle | Turbopack dev, production build via Next.js compiler |
+| COA coverage | 58 of 127 products have real COA data (from supplier DOCX files) |
 
 ---
 
@@ -293,7 +294,7 @@ npx ts-node prisma/seed.ts
 
 ### 5.1 — Product Data (`src/data/products.ts`)
 
-- **533 lines**, 73 products
+- **~700 lines**, 127 products
 - Interface: `Product` (17 fields including `name`, `imgKey`, `botanicalName`, `specs`, `gcmsBatchId`, `badgeRule`, `molecules[]`, `category`)
 - Categories: Floral, Wellness, Mint, Industrial, Citrus, Spice, Woods, Carrier Oils, Butters, Extracts, Aloe
 - Helpers: `getAllProducts()`, `getProductBySlug()`, `getCategories()`
@@ -333,13 +334,14 @@ npx ts-node prisma/seed.ts
 ## 6. Routes & Rendering
 
 | Path | Type | Page Component | Data Dependencies |
-|---|---|---|---|
+|---|---|---|---|---|
 | `/` | Static (redirect) | `page.tsx` | None — `redirect('/en')` |
 | `/[locale]` | Dynamic | `[locale]/page.tsx` | i18n messages |
-| `/[locale]/products` | Dynamic | `products/page.tsx` | `getAllProducts()` (73 products) |
-| `/[locale]/products/[slug]` | **SSG** (73 paths) | `products/[slug]/page.tsx` | `getProductBySlug()`, `getGcmsData()`, `getAllProducts()` |
+| `/[locale]/products` | Dynamic | `products/page.tsx` | `getAllProducts()` (127 products) |
+| `/[locale]/products/[slug]` | **force-dynamic** (127 paths) | `products/[slug]/page.tsx` | `getProductBySlug()`, `getGcmsData()`, `getAllProducts()` |
 | `/[locale]/academy` | Dynamic | `academy/page.tsx` | `getAllArticles()` (8 articles) |
-| `/[locale]/academy/[id]` | **SSG** (8 paths) | `academy/[id]/page.tsx` | `getArticleById()`, `getArticleContent()` |
+| `/[locale]/academy/[id]` | **force-dynamic** (8 paths) | `academy/[id]/page.tsx` | `getArticleById()`, `getArticleContent()` |
+| `/[locale]/coa/[id]` | **force-dynamic** | `coa/[id]/page.tsx` | `getCoA()`, branded COA template |
 | `/[locale]/why-us` | Dynamic | `why-us/page.tsx` | i18n messages |
 | `/[locale]/contact` | Dynamic | `contact/page.tsx` | i18n messages |
 
@@ -749,6 +751,44 @@ npx next build             # Verify zero-error production build
 npm run build    # Production build — must pass with zero errors
 npm run start    # Serve production build locally
 ```
+
+## Current Status — May 2026
+
+### Catalog
+| Metric | Value |
+|---|---|
+| Products in codebase | 127 |
+| COA coverage | 58 products (from supplier DOCX files) |
+| Products missing COA | 69 — includes aloe extracts, fruit extracts, butters, essential oils (jasmine, rose, sandalwood, frankincense), floral waters, oleoresins |
+| GC/MS analyses | 47 |
+| Academy articles | 8 |
+| Molecule profiles | 35 |
+| Spreadsheet rows (Master + Image Library) | 125 (all Website:Yes) |
+
+### Product Images
+- **7 products** have real product photos (avocado, cocoa butter, coconut, jojoba, sweet almond, shea, mango)
+- **3 products** have dedicated botanical SVGs (lavender, tea tree, eucalyptus)
+- **117 products** use shared generic SVGs (carrier, spice, floral, woods, mint, citrus, fallback)
+- **Next step:** User to generate ~127 product images via Midjourney using prompts in Image Library.xlsx, then codebase images map updated in batch
+
+### Spreadsheet Sync (Phase 1 & 2 — Complete)
+- Master.xlsx and Image Library.xlsx both synced to 125 rows
+- All codebase products present in both spreadsheets
+- Website:Yes/No column populated correctly
+- 15 spreadsheet-only products (oleoresins, floral waters, spice oils) now added to codebase (Phase 3)
+
+### Known Non-Blocking Warnings
+1. `turbopack.root` — multiple lockfiles detected; not configured (cosmetic)
+2. `middleware` deprecated — rename to `proxy.ts` in future (Next.js 16)
+
+### Image Generation Plan
+1. User generates product images using Midjourney prompts (from Image Library.xlsx)
+2. User provides generated image files
+3. Codebase updated: `public/images/products/{id}/product.jpg` + `images` map in `products.ts`
+4. Image Library.xlsx updated: `Image Generated` column marked Yes
+5. Committed and pushed to GitHub
+
+---
 
 **Pre-commit checklist:**
 - [ ] `npx next build` passes

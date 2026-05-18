@@ -35,10 +35,11 @@
 | `/[locale]/contact` | Dynamic | ContactForm (Server Action + Zod) |
 
 ## Data Layer (static, build-time)
-- `src/data/products.ts` — 73 products, specs, badge rules, categories
-- `src/data/gcms.ts` — 65 GC/MS analyses with compound breakdowns
+- `src/data/products.ts` — 127 products, specs, badge rules, categories
+- `src/data/gcms.ts` — 47 GC/MS analyses with compound breakdowns
 - `src/data/academy.ts` — 8 articles with full content sections
 - `src/data/academy.ts` (re-export) — `moleculeData` with 35 molecule profiles
+- `src/data/productMeta.ts` — COA data for 58 products, origin maps, procurement info
 
 ## Components
 
