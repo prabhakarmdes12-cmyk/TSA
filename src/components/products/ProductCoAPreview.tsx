@@ -1,13 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { FileText, ChevronDown, ChevronUp } from 'lucide-react';
+import { FileText, ChevronDown, ChevronUp, ExternalLink, MessageCircle } from 'lucide-react';
 import { getCoA } from '@/data/productMeta';
 import type { Product } from '@/data/products';
+import { useLocale } from 'next-intl';
+import Link from 'next/link';
 
 export function ProductCoAPreview({ product }: { product: Product }) {
   const [expanded, setExpanded] = useState(false);
-  const coa = getCoA(product);
+  const locale = useLocale();
+  const hasCoa = getCoA(product).length > 0;
 
   return (
     <div className="glass rounded-xl p-4">
@@ -22,60 +25,44 @@ export function ProductCoAPreview({ product }: { product: Product }) {
         {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
 
-      <div className="mt-2 text-[10px] text-[var(--color-muted)] flex items-center gap-2">
-        <span>14 tests</span>
-        <span className="w-px h-3 bg-[var(--color-border)]" />
-        <span>Compliant per USP/EP</span>
-        <span className="w-px h-3 bg-[var(--color-border)]" />
-        <span>Method: GC/FID, HPLC, ICP-MS</span>
-      </div>
-
       {expanded && (
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full text-[11px] border-collapse">
-            <thead>
-              <tr className="border-b border-[var(--color-border)]">
-                <th className="text-left py-2 pr-3 text-[10px] text-[var(--color-muted)] font-semibold uppercase tracking-wider whitespace-nowrap">
-                  Parameter
-                </th>
-                <th className="text-left py-2 pr-3 text-[10px] text-[var(--color-muted)] font-semibold uppercase tracking-wider whitespace-nowrap">
-                  Specification
-                </th>
-                <th className="text-left py-2 pr-3 text-[10px] text-[var(--color-muted)] font-semibold uppercase tracking-wider whitespace-nowrap">
-                  Result
-                </th>
-                <th className="text-left py-2 text-[10px] text-[var(--color-muted)] font-semibold uppercase tracking-wider whitespace-nowrap">
-                  Method
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {coa.map((row) => (
-                <tr key={row.parameter} className="border-b border-[var(--color-border)]/50">
-                  <td className="py-1.5 pr-3 text-[var(--color-text-main)] whitespace-nowrap">
-                    {row.parameter}
-                  </td>
-                  <td className="py-1.5 pr-3 text-[var(--color-muted)] whitespace-nowrap">
-                    {row.spec}
-                  </td>
-                  <td className="py-1.5 pr-3">
-                    <span
-                      className={
-                        row.result === 'Conforms' || row.result === 'Compliant' || row.result === 'Not detected' || row.result.startsWith('<')
-                          ? 'text-[var(--color-accent-green)]'
-                          : 'text-[var(--color-text-main)]'
-                      }
-                    >
-                      {row.result}
-                    </span>
-                  </td>
-                  <td className="py-1.5 text-[var(--color-muted)] whitespace-nowrap">
-                    {row.method}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="mt-3">
+          {hasCoa ? (
+            <div className="flex items-start gap-3 mt-2 p-4 rounded-xl bg-[rgba(191,111,0,0.05)] border border-[rgba(191,111,0,0.1)]">
+              <FileText size={18} className="text-[var(--color-primary)] shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs text-[var(--color-text-main)] leading-relaxed font-medium">
+                  Certificate of Analysis available for {product.name}.
+                </p>
+                <p className="text-[10px] text-[var(--color-muted)] mt-1">
+                  Batch-specific test results with full parameter specifications.
+                </p>
+                <Link
+                  href={`/${locale}/coa/${product.id}`}
+                  className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-semibold text-[var(--color-primary)] hover:brightness-110 transition-all"
+                >
+                  <ExternalLink size={12} />
+                  View Full COA
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-start gap-3 mt-2 p-4 rounded-xl bg-[rgba(191,111,0,0.05)] border border-[rgba(191,111,0,0.1)]">
+              <MessageCircle size={18} className="text-[var(--color-primary)] shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs text-[var(--color-text-main)] leading-relaxed">
+                  Certificate of Analysis available on request — contact us for batch-specific documentation.
+                </p>
+                <Link
+                  href={`/${locale}/contact`}
+                  className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-semibold text-[var(--color-primary)] hover:brightness-110 transition-all"
+                >
+                  Request COA
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
