@@ -62,7 +62,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass overflow-hidden">
-        <nav className="max-w-[1400px] mx-auto px-4 lg:px-6 h-14 md:h-16 flex items-center md:justify-between gap-2 md:gap-4">
+        <nav className="max-w-[1400px] mx-auto px-4 lg:px-6 h-14 md:h-16 flex items-center md:justify-between gap-[50px] md:gap-4">
         <Link
           href={`/${locale}`}
           className="relative flex items-center gap-3 group min-w-0 shrink"
