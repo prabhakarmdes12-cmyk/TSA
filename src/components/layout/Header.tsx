@@ -62,7 +62,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass overflow-hidden">
-      <nav className="max-w-[1400px] mx-auto px-4 lg:px-6 h-14 md:h-16 flex items-center justify-between gap-2 md:gap-4">
+        <nav className="max-w-[1400px] mx-auto px-4 lg:px-6 h-14 md:h-16 flex items-center justify-between gap-2 md:gap-4 max-sm:px-3 max-sm:gap-1">
         <Link
           href={`/${locale}`}
           className="relative flex items-center gap-3 group min-w-0 shrink"
@@ -75,7 +75,7 @@ export function Header() {
             key={logo}
             src={logo}
             alt="TS Aromatics"
-            className="h-7 md:h-8 w-auto max-w-full transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
+            className="h-7 md:h-8 max-sm:h-6 w-auto max-w-full transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
             fetchPriority="high"
           />
         </Link>
@@ -106,7 +106,7 @@ export function Header() {
           {mounted && (
             <button
               onClick={toggleTheme}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] hover:scale-105 transition-transform shrink-0"
+              className="w-10 h-10 md:w-11 md:h-11 max-sm:w-9 max-sm:h-9 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] hover:scale-105 transition-transform shrink-0"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
@@ -115,7 +115,7 @@ export function Header() {
 
           <button
             onClick={toggleLang}
-            className="w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] text-xs font-black hover:scale-105 transition-transform shrink-0"
+            className="w-10 h-10 md:w-11 md:h-11 max-sm:w-9 max-sm:h-9 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] text-xs font-black hover:scale-105 transition-transform shrink-0"
             aria-label="Switch language"
           >
             {locale === 'en' ? 'EN' : 'हि'}
@@ -129,7 +129,7 @@ export function Header() {
           </Link>
 
           <button
-            className="lg:hidden w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] shrink-0"
+            className="lg:hidden w-10 h-10 md:w-11 md:h-11 max-sm:w-9 max-sm:h-9 rounded-full grid place-items-center bg-[var(--color-surface-1)] text-[var(--color-text-main)] shrink-0"
             onClick={() => setOpen(!open)}
             aria-label="Toggle navigation"
           >
