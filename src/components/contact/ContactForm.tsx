@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useEnquiry } from '@/contexts/enquiry';
-import { X } from 'lucide-react';
+import { X, MessageCircle } from 'lucide-react';
 import { submitContact } from '@/app/actions/contact';
 
 export function ContactForm() {
@@ -126,13 +126,37 @@ export function ContactForm() {
         <p className="text-xs text-[var(--color-brand-red)] mb-4">{state.error}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full h-11 rounded-xl bg-[var(--color-primary)] text-white font-bold text-sm hover:brightness-110 transition-all active:scale-[0.98] disabled:opacity-50"
-      >
-        {pending ? '...' : t('submit')}
-      </button>
+      <div className="flex gap-3">
+        <button
+          type="submit"
+          disabled={pending}
+          className="flex-1 h-11 rounded-xl bg-[var(--color-primary)] text-white font-bold text-sm hover:brightness-110 transition-all active:scale-[0.98] disabled:opacity-50"
+        >
+          {pending ? '...' : t('submit')}
+        </button>
+        <a
+          href={(() => {
+            const waProducts = enquiryItems.length > 0
+              ? enquiryItems.map(i => i.name).join(', ')
+              : 'your products';
+            const msg = encodeURIComponent(
+              `Hi TS Aromatics! 👋 I'm interested in: ${waProducts}\n\n` +
+              `Could you help me with:\n` +
+              `1. Approximate quantity: [sample / bulk]\n` +
+              `2. Application / intended use\n` +
+              `3. Any specific documentation needed [COA / MSDS / others]\n\n` +
+              `Please share pricing, MOQ, and sample availability. Thanks!`
+            );
+            return `https://wa.me/919891438889?text=${msg}`;
+          })()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm hover:brightness-110 transition-all active:scale-[0.98] inline-flex items-center justify-center gap-2"
+        >
+          <MessageCircle size={16} />
+          {t('whatsapp')}
+        </a>
+      </div>
     </form>
   );
 }
