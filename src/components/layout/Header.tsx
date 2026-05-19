@@ -75,7 +75,7 @@ export function Header() {
             key={logo}
             src={logo}
             alt="TS Aromatics"
-            className="h-7 md:h-8 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
+            className="h-7 md:h-8 w-auto max-w-full transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_16px_rgba(240,66,27,0.35)]"
             fetchPriority="high"
           />
         </Link>
