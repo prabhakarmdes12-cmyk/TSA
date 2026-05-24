@@ -15,11 +15,11 @@ export function ProductCard({ product, locale }: { product: Product; locale: str
     <div className="glass rounded-2xl overflow-hidden group hover:border-[rgba(255,255,255,0.15)] transition-all duration-500 flex flex-col">
       {/* Image area */}
       <Link href={`/${locale}/products/${product.id}`}>
-        <div className="relative h-48 bg-[var(--color-surface-1)] flex items-center justify-center p-6">
+        <div className="relative aspect-square bg-[var(--color-surface-1)] overflow-hidden">
           <img
             src={product.img}
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           {product.badge && (
             <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[var(--color-primary)] text-white">

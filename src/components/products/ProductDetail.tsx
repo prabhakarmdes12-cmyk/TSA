@@ -47,11 +47,11 @@ export function ProductDetail({
         <div className="grid lg:grid-cols-5 gap-10">
           {/* Left — Image */}
           <div className="lg:col-span-2">
-            <div className="glass rounded-2xl p-8 flex items-center justify-center aspect-square">
+            <div className="glass rounded-2xl overflow-hidden aspect-square">
               <img
                 src={product.img}
                 alt={product.name}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
