@@ -49,10 +49,10 @@ export function AcademyTeaser() {
                 <img
                   src={
                     a.id === 'a1'
-                      ? 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=375&fit=crop'
+                      ? '/images/academy/lavender.png'
                       : a.id === 'a2'
-                      ? 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=375&fit=crop'
-                      : 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=600&h=375&fit=crop'
+                      ? '/images/academy/formulation.png'
+                      : '/images/academy/lab.png'
                   }
                   alt=""
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"

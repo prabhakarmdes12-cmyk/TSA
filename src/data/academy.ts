@@ -21,9 +21,9 @@ export interface ArticleContent {
 }
 
 const articleImages: Record<string, string> = {
-  lavender: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop',
-  formulation: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=500&fit=crop',
-  lab: 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=800&h=500&fit=crop',
+  lavender: '/images/academy/lavender.png',
+  formulation: '/images/academy/formulation.png',
+  lab: '/images/academy/lab.png',
 };
 
 export const academyArticles: AcademyArticle[] = [
@@ -93,14 +93,14 @@ const sections_a8: ArticleSection[] = [
 ];
 
 const content: Record<string, ArticleContent> = {
-  a1: { heroImg: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=600&fit=crop', author: 'TS Aromatics Quality Team', date: 'May 2026', readTime: '9 min read', sections: sections_a1 },
-  a2: { heroImg: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&h=600&fit=crop', author: 'TS Aromatics Quality Team', date: 'May 2026', readTime: '10 min read', sections: sections_a2 },
-  a3: { heroImg: 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=1200&h=600&fit=crop', author: 'TS Aromatics Operations Team', date: 'May 2026', readTime: '8 min read', sections: sections_a3 },
-  a4: { heroImg: 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=1200&h=600&fit=crop', author: 'TS Aromatics Scientific Team', date: 'May 2026', readTime: '6 min read', sections: sections_a4 },
-  a5: { heroImg: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&h=600&fit=crop', author: 'TS Aromatics Formulation Team', date: 'May 2026', readTime: '7 min read', sections: sections_a5 },
-  a6: { heroImg: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=600&fit=crop', author: 'TS Aromatics Safety Team', date: 'May 2026', readTime: '5 min read', sections: sections_a6 },
-  a7: { heroImg: 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=1200&h=600&fit=crop', author: 'TS Aromatics Lab Team', date: 'May 2026', readTime: '7 min read', sections: sections_a7 },
-  a8: { heroImg: 'https://images.unsplash.com/photo-1581092795360-fd01ca4f0952?w=1200&h=600&fit=crop', author: 'TS Aromatics Scientific Team', date: 'May 2026', readTime: '5 min read', sections: sections_a8 },
+  a1: { heroImg: '/images/academy/lavender.png', author: 'TS Aromatics Quality Team', date: 'May 2026', readTime: '9 min read', sections: sections_a1 },
+  a2: { heroImg: '/images/academy/formulation.png', author: 'TS Aromatics Quality Team', date: 'May 2026', readTime: '10 min read', sections: sections_a2 },
+  a3: { heroImg: '/images/academy/lab.png', author: 'TS Aromatics Operations Team', date: 'May 2026', readTime: '8 min read', sections: sections_a3 },
+  a4: { heroImg: '/images/academy/lab.png', author: 'TS Aromatics Scientific Team', date: 'May 2026', readTime: '6 min read', sections: sections_a4 },
+  a5: { heroImg: '/images/academy/formulation.png', author: 'TS Aromatics Formulation Team', date: 'May 2026', readTime: '7 min read', sections: sections_a5 },
+  a6: { heroImg: '/images/academy/lavender.png', author: 'TS Aromatics Safety Team', date: 'May 2026', readTime: '5 min read', sections: sections_a6 },
+  a7: { heroImg: '/images/academy/lab.png', author: 'TS Aromatics Lab Team', date: 'May 2026', readTime: '7 min read', sections: sections_a7 },
+  a8: { heroImg: '/images/academy/lab.png', author: 'TS Aromatics Scientific Team', date: 'May 2026', readTime: '5 min read', sections: sections_a8 },
 };
 
 export function getAllArticles(): AcademyArticle[] {

@@ -696,7 +696,6 @@ const t = useTranslations('hero');
 |---|---|---|
 | **`turbopack.root` warning** | Non-blocking | Multiple lockfiles detected (root + v3/). Cosmetic — set prop in next.config.ts to silence. |
 | **`middleware` deprecated** | Non-blocking | Rename to `proxy.ts` in future Next.js update. Current middleware still works. |
-| **`images.unsplash.com` DNS errors** | Academy teaser | Some article images reference unsplash URLs that may fail in restricted network environments. Fallback images should be added. |
 | **Prisma client not generated** | Expected | `prisma generate` hasn't been run. All data uses static files. |
 
 ### Risks
