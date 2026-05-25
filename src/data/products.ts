@@ -93,6 +93,7 @@ const images: Record<string, string> = {
   'fennel-seed-oil': '/images/products/fennel-seed-oil/product.png',
   'eugenol': '/images/products/eugenol/product.png',
   'alpha-pinene': '/images/products/alpha-pinene/product.png',
+  'alpha-terpineol': '/images/products/alpha-terpineol/product.png',
   'kokum-butter': '/images/products/kokum-butter/product.png',
   'myrhh-oil': '/images/products/myrhh-oil/product.png',
   'neroli-oil': '/images/products/neroli-oil/product.png',
