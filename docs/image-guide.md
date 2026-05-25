@@ -6,75 +6,63 @@ Product images are resolved through a two-layer system:
 
 ```
 imgKey (in rawProducts entry)
-    └─► images map (products.ts line 69–123)
+    └─► images map (products.ts lines ~69–196)
             └─► public path
 ```
 
 Each `rawProducts` entry has an `imgKey` field. The `images` map in `src/data/products.ts` converts that key to a URL path:
 
 ```
-imgKey: 'lavender'   →   '/images/products/lavender-oil/botanical.svg'
-imgKey: 'carrier'    →   '/images/products/carrier.svg'          (shared SVG)
-imgKey: 'coconut'    →   '/images/products/extra-virgin-coconut-oil/product.jpg'   (real photo)
+imgKey: 'citrus'     →   '/images/products/citrus.svg'          (category fallback)
+imgKey: 'carrier'    →   '/images/products/carrier.svg'          (category fallback)
+```
+
+But product-specific entries take priority in the loading logic:
+```
+images[p.id] || images[p.imgKey] || images.fallback
 ```
 
 ## Image Types
 
 | Type | Path Pattern | Count |
 |---|---|---|
-| **Real product photo** | `/images/products/{product-id}/product.jpg` | 7 products |
-| **Dedicated botanical SVG** | `/images/products/{product-id}/botanical.svg` | 3 products |
-| **Shared category SVG** | `/images/products/{category}.svg` | ~117 products fallback |
+| **Real product image** | `/images/products/{product-id}/product.png` | 127/127 products |
+| **Category SVG (fallback key)** | `/images/products/{category}.svg` | unused for product display (keys remain in `images` record) |
 
-### Shared SVGs (used as fallbacks)
+### Shared SVGs (category fallback keys)
 
-These SVGs serve multiple products grouped by visual category:
-
-| File | Used By |
-|---|---|
-| `carrier.svg` | Carrier Oils, Butters, Seed Oils |
-| `floral.svg` | Floral Oils, Floral Waters, Extracts, Aloe |
-| `spice.svg` | Spice Oils, Oleoresins |
-| `citrus.svg` | Citrus Oils |
-| `woods.svg` | Woody Oils, Industrial compounds |
-| `mint.svg` | Mint products |
-| `fallback.svg` | Any product with unassigned imgKey |
+These SVGs remain in the `images` record as fallback entries — they are NOT actively used for product display since all 127 products have `product.png` entries that take priority via `images[p.id]`.
 
 ## Adding a Real Product Image
 
 ### Step 1: Place the image file
 
 ```
-public/images/products/{product-id}/product.jpg
+public/images/products/{product-id}/product.png
 ```
 
-Example: `public/images/products/lavender-oil/product.jpg`
+Example: `public/images/products/lavender-oil/product.png`
+
+If the directory doesn't exist yet, create it:
+```
+public/images/products/{product-id}/
+└── product.png
+```
 
 ### Step 2: Update the `images` map in `products.ts`
 
-Find the `imgKey` entry and point it to the real image:
+Add an entry to the `images` record in `src/data/products.ts`:
 
 ```typescript
-// Before (shared SVG):
-lavender: '/images/products/lavender-oil/botanical.svg',
-
-// After (real photo):
-lavender: '/images/products/lavender-oil/product.jpg',
+'{product-id}': '/images/products/{product-id}/product.png',
 ```
 
-If the product uses a shared SVG (most common), change its dedicated entry or add one:
+Insert it alphabetically among the other product-specific entries (lines ~83–196).
 
-```typescript
-// Before (shared fallback):
-'linseed-oil': '/images/products/carrier.svg',
+### Step 3: Update the Excel files
 
-// After (real photo):
-'linseed-oil': '/images/products/linseed-oil/product.jpg',
-```
-
-### Step 3: Update Image Library.xlsx
-
-Open `products/TSA_Aromatics_Image_Library.xlsx` and set `Image Generated: Yes` for the product.
+- Open `products/TSA_Aromatics_Image_Library.xlsx` → set `Image Generated` (col G) to ✅
+- Open `products/TS_Aromatics_Master.xlsx` → set `Image Status` (col F) to ✅
 
 ### Step 4: Verify
 
@@ -82,39 +70,43 @@ Open `products/TSA_Aromatics_Image_Library.xlsx` and set `Image Generated: Yes` 
 npm run build
 ```
 
+### Step 5: Commit
+
+```bash
+git add -A
+git commit -m "Add image for [product-name]"
+git push
+```
+
 ## Current Image Status (as of May 2026)
 
-### Products with real photos (product.jpg)
+**All 127 products have real product images.** Every product ID has an entry in the `images` record pointing to its `public/images/products/{id}/product.png`.
 
-| Product ID | Image |
-|---|---|
-| `extra-virgin-coconut-oil` | `/images/products/extra-virgin-coconut-oil/product.jpg` |
-| `avocado-oil` | `/images/products/avocado-oil/product.jpg` |
-| `sweet-almond-oil` | `/images/products/sweet-almond-oil/product.jpg` |
-| `jojoba-oil-carrier` | `/images/products/jojoba-oil-carrier/product.jpg` |
-| `shea-butter` | `/images/products/sheabutter/product.png` |
-| `mango-butter` | `/images/products/mango-butter/product.png` |
-| `cocoa-butter` | `/images/products/cocoa-butter/product.png` |
+Image resolution logic:
+```
+images[p.id] || images[p.imgKey] || images.fallback
+```
 
-### Products with dedicated botanical SVGs
+- `images[p.id]` — product-specific `product.png` (127/127 populated)
+- `images[p.imgKey]` — category SVG (e.g., `citrus.svg`, `carrier.svg`) — fallback only
+- `images.fallback` — `/images/products/fallback.svg` — last resort
 
-| Product ID | Image |
-|---|---|
-| `lavender-oil` | `/images/products/lavender-oil/botanical.svg` |
-| `tea-tree-oil` | `/images/products/tea-tree-oil/botanical.svg` |
-| `eucalyptus-oil` | `/images/products/eucalyptus-oil/botanical.svg` |
+### Products that initially had missing images (now resolved)
+- `aloe-butter-product` — missing file, now added
+- `pine-oil` — missing file + code entry, now added
+- `spearmint-oil-alt` — missing file + code entry, now added
 
-### All other products (117)
-
-Use shared category SVGs (`carrier.svg`, `floral.svg`, `spice.svg`, etc.).
+### Products initially pointing to SVGs (now updated to `product.png`)
+- `rice-bran-oil`, `linseed-oil`, `safflower-oil`, `walnut-oil`, `broccoli-oil`, `raspberry-seed-oil`, `marula-oil`, `aloe-vera-oil`
+- `dill-oil`, `turmeric-oil`, `fennel-seed-oil`, `eugenol`, `alpha-pinene`
+- `kokum-butter`, `myrhh-oil`, `neroli-oil`
 
 ## Image Specifications
 
 | Property | Recommended |
 |---|---|
-| Format | JPEG (.jpg) |
+| Format | PNG (.png) |
 | Dimensions | 800×800 px (square) |
-| Quality | 85–92% |
 | Color space | sRGB |
 | Max file size | < 500 KB |
 | Background | Transparent or off-white |
@@ -126,25 +118,22 @@ After you add images, the folder for a product should look like:
 
 ```
 public/images/products/lavender-oil/
-├── .gitkeep           ← placeholder (delete after adding images)
-└── product.jpg        ← your generated image
+└── product.png        ← your generated image
 ```
 
-## Batch Update Workflow
+## Batch Update Workflow (for future additions)
 
-When you have multiple images ready:
+When adding new products with images:
 
-1. Drop all `product.jpg` files into the corresponding product folders
-2. Run a script to update the `images` map in `products.ts`
-3. Update Image Library.xlsx with `Image Generated: Yes`
-4. Remove `.gitkeep` files from updated folders
+1. Create a new directory `public/images/products/{product-id}/`
+2. Place `product.png` in it
+3. Add an entry to the `images` record in `src/data/products.ts`
+4. Add the product row to both Excel files with ✅
 5. Build and deploy
 
 ```bash
-# Build check after adding images
 npm run build
-# If pass, commit and push
 git add -A
-git commit -m "feat: add product images for [product names]"
+git commit -m "feat: add [product-name] with image"
 git push
 ```

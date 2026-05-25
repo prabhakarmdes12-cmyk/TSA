@@ -48,6 +48,7 @@ This journal documents not just what was built, but *why* and *how* — the desi
 | Dynamic routes | Home, products listing, academy listing, why-us, contact |
 | TypeScript | Strict mode — `strict: true` |
 | Bundle | Turbopack dev, production build via Next.js compiler |
+| Product images | 127/127 with actual images (`product.png`) |
 | COA coverage | 58 of 127 products have real COA data (from supplier DOCX files) |
 
 ---
@@ -758,35 +759,33 @@ npm run start    # Serve production build locally
 | Metric | Value |
 |---|---|
 | Products in codebase | 127 |
+| Product images | 127/127 with `product.png` |
 | COA coverage | 58 products (from supplier DOCX files) |
 | Products missing COA | 69 — includes aloe extracts, fruit extracts, butters, essential oils (jasmine, rose, sandalwood, frankincense), floral waters, oleoresins |
 | GC/MS analyses | 47 |
 | Academy articles | 8 |
 | Molecule profiles | 35 |
-| Spreadsheet rows (Master + Image Library) | 125 (all Website:Yes) |
+| Spreadsheet rows (Master + Image Library) | 127 (all Website:Yes, all ✅ image status) |
 
 ### Product Images
-- **7 products** have real product photos (avocado, cocoa butter, coconut, jojoba, sweet almond, shea, mango)
-- **3 products** have dedicated botanical SVGs (lavender, tea tree, eucalyptus)
-- **117 products** use shared generic SVGs (carrier, spice, floral, woods, mint, citrus, fallback)
-- **Next step:** User to generate ~127 product images via Midjourney using prompts in Image Library.xlsx, then codebase images map updated in batch
+- **127/127 products** have real product images (`product.png`)
+- Image resolution: `images[p.id]` (product-specific) > `images[p.imgKey]` (category) > `images.fallback`
+- 3 products originally missing (aloe-butter-product, pine-oil, spearmint-oil-alt) — since resolved
+- 14 products were added to `images` record (had files but no code entries)
+- 16 products were updated from SVG placeholders to actual image paths
 
-### Spreadsheet Sync (Phase 1 & 2 — Complete)
-- Master.xlsx and Image Library.xlsx both synced to 125 rows
+### Spreadsheet Sync — Complete
+- Master.xlsx and Image Library.xlsx both fully synced to 127 rows
 - All codebase products present in both spreadsheets
-- Website:Yes/No column populated correctly
-- 15 spreadsheet-only products (oleoresins, floral waters, spice oils) now added to codebase (Phase 3)
+- Column G (Image Library) and Column F (Master) both show ✅/❌ with colored cells
+- All 127 products marked ✅ (green) — 0 remaining
 
 ### Known Non-Blocking Warnings
 1. `turbopack.root` — multiple lockfiles detected; not configured (cosmetic)
 2. `middleware` deprecated — rename to `proxy.ts` in future (Next.js 16)
 
-### Image Generation Plan
-1. User generates product images using Midjourney prompts (from Image Library.xlsx)
-2. User provides generated image files
-3. Codebase updated: `public/images/products/{id}/product.jpg` + `images` map in `products.ts`
-4. Image Library.xlsx updated: `Image Generated` column marked Yes
-5. Committed and pushed to GitHub
+### Image Generation — Complete
+All 127 products have `product.png` in their directories. Images record in `products.ts` maps every product ID to its `product.png`. Both Excel files updated with ✅ status.
 
 ---
 
@@ -801,7 +800,7 @@ npm run start    # Serve production build locally
 
 > **Document maintained by:** Chiti Technologies — Design & Engineering Studio  
 > **Designer:** Prabhakar Kumar  
-> **Last updated:** 2026-05-13  
+> **Last updated:** 2026-05-26  
 > **Portfolio:** [github.com/prabhakarmdes12-cmyk](https://github.com/prabhakarmdes12-cmyk)  
 > **Questions?** Start with this journal, then read the component file directly.  
 > *Every line of code is a design decision. Every design decision is documented.*

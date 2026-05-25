@@ -78,7 +78,7 @@
 ## Build Status
 - `npx next build` — ✅ zero errors
 - All routes compile (3 dynamic, 3 SSG, 1 static)
-- SSG routes use `generateStaticParams` for all 73 products + 8 articles
+- SSG routes use `generateStaticParams` for all 127 products + 8 articles
 
 ## i18n
 - `messages/en.json` and `messages/hi.json` — 50+ keys each
