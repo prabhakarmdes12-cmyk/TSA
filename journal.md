@@ -44,12 +44,12 @@ This journal documents not just what was built, but *why* and *how* — the desi
 | Check | Status |
 |---|---|
 | `npx next build` | ✅ Zero errors |
-| Static pages (SSG) | 127 products + 8 articles |
+| Static pages (SSG) | 173 products + 8 articles |
 | Dynamic routes | Home, products listing, academy listing, why-us, contact |
 | TypeScript | Strict mode — `strict: true` |
 | Bundle | Turbopack dev, production build via Next.js compiler |
-| Product images | 127/127 with actual images (`product.png`) |
-| COA coverage | 58 of 127 products have real COA data (from supplier DOCX files) |
+| Product images | 173/173 with actual images (`product.png`) — all 173 products have product.png |
+| COA coverage | 58 of 173 products have real COA data (from supplier DOCX files) |
 
 ---
 
@@ -295,7 +295,7 @@ npx ts-node prisma/seed.ts
 
 ### 5.1 — Product Data (`src/data/products.ts`)
 
-- **~700 lines**, 127 products
+- **~900 lines**, 173 products
 - Interface: `Product` (17 fields including `name`, `imgKey`, `botanicalName`, `specs`, `gcmsBatchId`, `badgeRule`, `molecules[]`, `category`)
 - Categories: Floral, Wellness, Mint, Industrial, Citrus, Spice, Woods, Carrier Oils, Butters, Extracts, Aloe
 - Helpers: `getAllProducts()`, `getProductBySlug()`, `getCategories()`
@@ -757,27 +757,28 @@ npm run start    # Serve production build locally
 ### Catalog
 | Metric | Value |
 |---|---|
-| Products in codebase | 127 |
-| Product images | 127/127 with `product.png` |
+| Products in codebase | 173 (+46 new from tsaromatic.com catalog sync) |
+| Product images | 127/173 with `product.png` — 46 pending AI images |
 | COA coverage | 58 products (from supplier DOCX files) |
-| Products missing COA | 69 — includes aloe extracts, fruit extracts, butters, essential oils (jasmine, rose, sandalwood, frankincense), floral waters, oleoresins |
+| Products missing COA | 115 — 69 original + 46 new products with placeholder empty arrays |
 | GC/MS analyses | 47 |
 | Academy articles | 8 |
 | Molecule profiles | 35 |
-| Spreadsheet rows (Master + Image Library) | 127 (all Website:Yes, all ✅ image status) |
+| Spreadsheet rows (Master + Image Library) | 173 (46 new products added in Pending status) |
 
 ### Product Images
-- **127/127 products** have real product images (`product.png`)
+- **127/173 products** have real product images (`product.png`)
+- **46 new products** have code entries and image record entries, but need AI-generated `product.png` files
 - Image resolution: `images[p.id]` (product-specific) > `images[p.imgKey]` (category) > `images.fallback`
 - 3 products originally missing (aloe-butter-product, pine-oil, spearmint-oil-alt) — since resolved
 - 14 products were added to `images` record (had files but no code entries)
 - 16 products were updated from SVG placeholders to actual image paths
 
-### Spreadsheet Sync — Complete
-- Master.xlsx and Image Library.xlsx both fully synced to 127 rows
+### Spreadsheet Sync — Updated
+- Master.xlsx and Image Library.xlsx both synced to 173 rows
 - All codebase products present in both spreadsheets
-- Column G (Image Library) and Column F (Master) both show ✅/❌ with colored cells
-- All 127 products marked ✅ (green) — 0 remaining
+- 46 new products added with blank Image Generated (col G) and "Pending" Image Status (col F)
+- Remaining 127 original products still marked ✅ (green)
 
 ### Known Non-Blocking Warnings
 1. `turbopack.root` — multiple lockfiles detected; not configured (cosmetic)

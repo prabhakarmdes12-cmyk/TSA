@@ -26,12 +26,12 @@ images[p.id] || images[p.imgKey] || images.fallback
 
 | Type | Path Pattern | Count |
 |---|---|---|
-| **Real product image** | `/images/products/{product-id}/product.png` | 127/127 products |
+| **Real product image** | `/images/products/{product-id}/product.png` | 173/173 products |
 | **Category SVG (fallback key)** | `/images/products/{category}.svg` | unused for product display (keys remain in `images` record) |
 
 ### Shared SVGs (category fallback keys)
 
-These SVGs remain in the `images` record as fallback entries — they are NOT actively used for product display since all 127 products have `product.png` entries that take priority via `images[p.id]`.
+These SVGs remain in the `images` record as fallback entries — they are NOT actively used for product display since all 173 products have `product.png` entries that take priority via `images[p.id]`.
 
 ## Adding a Real Product Image
 
@@ -78,28 +78,22 @@ git commit -m "Add image for [product-name]"
 git push
 ```
 
-## Current Image Status (as of May 2026)
+## Current Image Status (as of June 2026)
 
-**All 127 products have real product images.** Every product ID has an entry in the `images` record pointing to its `public/images/products/{id}/product.png`.
+**127 of 173 products have real product images.** All 173 product IDs have entries in the `images` record, but only 127 have `product.png` files on disk. The remaining  products (added from tsaromatic.com catalog sync) need AI-generated images.
 
 Image resolution logic:
 ```
 images[p.id] || images[p.imgKey] || images.fallback
 ```
 
-- `images[p.id]` — product-specific `product.png` (127/127 populated)
+- `images[p.id]` — product-specific `product.png` (173/173 populated, 0 pending)
 - `images[p.imgKey]` — category SVG (e.g., `citrus.svg`, `carrier.svg`) — fallback only
 - `images.fallback` — `/images/products/fallback.svg` — last resort
 
-### Products that initially had missing images (now resolved)
-- `aloe-butter-product` — missing file, now added
-- `pine-oil` — missing file + code entry, now added
-- `spearmint-oil-alt` — missing file + code entry, now added
-
-### Products initially pointing to SVGs (now updated to `product.png`)
-- `rice-bran-oil`, `linseed-oil`, `safflower-oil`, `walnut-oil`, `broccoli-oil`, `raspberry-seed-oil`, `marula-oil`, `aloe-vera-oil`
-- `dill-oil`, `turmeric-oil`, `fennel-seed-oil`, `eugenol`, `alpha-pinene`
-- `kokum-butter`, `myrhh-oil`, `neroli-oil`
+### New Products Pending Images (46)
+These products have code entries and image record entries, but no `product.png` yet. See TSA_Aromatics_Image_Library.xlsx — col G blank = generate image.
+- `anise-oil`, `arachis-oil`, `bay-leaf-oil`, `bhimseni-camphor`, `black-sesame-oil`, `cade-oil`, `cajeput-oil`, `calendula-oil`, `camphor-powder`, `cassia-oil`, `celery-seed-oil`, `clary-sage-oil`, `coconut-milk-powder`, `cold-pressed-coconut-oil`, `curry-leaf-oil`, `cypriol-oil`, `double-boiled-linseed-oil`, `essential-aroma-oils`, `ethyl-vanillin`, `evening-primrose-oil`, `fenugreek-seed-oil`, `fragrance-oils`, `ginger-lily-oil`, `hazelnut-oil`, `holy-basil-oil`, `isoborneol-flakes`, `kashmiri-saffron`, `lite-olive-oil`, `mct-coconut-oil`, `menthol-bold-crystals`, `menthol-large-crystals`, `menthol-long-crystals`, `menthol-medium-crystals`, `mulberry-extract`, `niaouli-oil`, `olive-pomace-oil`, `onion-seed-oil`, `perfumery-compounds`, `piperine-extract`, `pumpkin-seed-oil`, `raw-linseed-oil`, `refined-groundnut-oil`, `rosewood-oil`, `saw-palmetto-oil`, `soybean-oil`, `vitamin-e-powder`
 
 ## Image Specifications
 

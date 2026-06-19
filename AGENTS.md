@@ -35,11 +35,11 @@
 | `/[locale]/contact` | Dynamic | ContactForm (Server Action + Zod) |
 
 ## Data Layer (static, build-time)
-- `src/data/products.ts` — 127 products, specs, badge rules, categories
+- `src/data/products.ts` — 173 products, specs, badge rules, categories
 - `src/data/gcms.ts` — 47 GC/MS analyses with compound breakdowns
 - `src/data/academy.ts` — 8 articles with full content sections
 - `src/data/academy.ts` (re-export) — `moleculeData` with 35 molecule profiles
-- `src/data/productMeta.ts` — COA data for 58 products, origin maps, procurement info
+- `src/data/productMeta.ts` — COA data for 58 products (+46 COA placeholder empty arrays for new products), origin maps, procurement info
 
 ## Components
 
@@ -78,7 +78,7 @@
 ## Build Status
 - `npx next build` — ✅ zero errors
 - All routes compile (3 dynamic, 3 SSG, 1 static)
-- SSG routes use `generateStaticParams` for all 127 products + 8 articles
+- SSG routes use `generateStaticParams` for all 173 products + 8 articles
 
 ## i18n
 - `messages/en.json` and `messages/hi.json` — 50+ keys each
